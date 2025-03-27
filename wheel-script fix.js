@@ -26,7 +26,23 @@ document.addEventListener("DOMContentLoaded", function () {
             ctx.fillText(options[i], 200 + Math.cos(sliceAngle * i + sliceAngle / 2) * 120, 200 + Math.sin(sliceAngle * i + sliceAngle / 2) * 120);
         }
     }
+// Get canvas element
+const canvas = document.getElementById("wheelCanvas");
+const ctx = canvas.getContext("2d");
 
+// Set canvas width & height dynamically
+function resizeCanvas() {
+let size = Math.min(window.innerWidth * 0.9, 400); // 90% of screen width, max 400px
+canvas.width = size;
+canvas.height = size;
+drawWheel(); // Redraw the wheel after resizing
+}
+
+// Redraw wheel on window resize
+window.addEventListener("resize", resizeCanvas);
+
+// Call function initially
+resizeCanvas();
     function spinWheel() {
         if (spinning) return;
         spinning = true;
